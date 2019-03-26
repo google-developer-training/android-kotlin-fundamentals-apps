@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2019, The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~      http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="revenue"
+            type="Integer" />
+
+        <variable
+            name="amountSold"
+            type="Integer" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <ImageView
+            android:id="@+id/background_image"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/bakery_back" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/margin_end_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_end="@dimen/default_spacing" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/margin_bottom_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintGuide_end="@dimen/default_spacing" />
+
+        <androidx.constraintlayout.widget.Guideline
+            android:id="@+id/margin_start_guide"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            app:layout_constraintGuide_begin="@dimen/default_spacing" />
+
+        <ImageButton
+            android:id="@+id/dessert_button"
+            android:layout_width="@dimen/button_width"
+            android:layout_height="@dimen/button_height"
+            android:background="?android:selectableItemBackground"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toTopOf="@+id/white_background"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/cupcake" />
+
+        <!-- Code for white box at the bottom, using ShapeDrawable defined in the drawable folder -->
+
+        <View
+            android:id="@+id/white_background"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/white_box"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/amount_sold_text" />
+
+        <TextView
+            android:id="@+id/revenue_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text='@{"$" + revenue.toString()}'
+            android:textColor="@color/green"
+            android:textSize="@dimen/large_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/margin_bottom_guide"
+            app:layout_constraintEnd_toStartOf="@+id/margin_end_guide"
+            tools:text="$92" />
+
+        <TextView
+            android:id="@+id/dessert_sold_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:text="@string/dessert_sold"
+            android:textSize="@dimen/medium_text_size"
+            app:layout_constraintBottom_toBottomOf="@+id/amount_sold_text"
+            app:layout_constraintStart_toStartOf="@+id/margin_start_guide" />
+
+        <TextView
+            android:id="@+id/amount_sold_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/default_spacing"
+            android:fontFamily="sans-serif-medium"
+            android:paddingTop="@dimen/default_spacing"
+            android:text="@{amountSold.toString()}"
+            android:textColor="@color/grey"
+            android:textSize="@dimen/medium_text_size"
+            app:layout_constraintBottom_toTopOf="@+id/revenue_text"
+            app:layout_constraintEnd_toStartOf="@+id/margin_end_guide"
+            tools:text="12" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
