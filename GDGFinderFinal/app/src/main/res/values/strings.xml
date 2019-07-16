@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?><!--
+  ~ Copyright 2019, The Android Open Source Project
+  ~
+  ~ Licensed under the Apache License, Version 2.0 (the "License");
+  ~ you may not use this file except in compliance with the License.
+  ~ You may obtain a copy of the License at
+  ~
+  ~     http://www.apache.org/licenses/LICENSE-2.0
+  ~
+  ~ Unless required by applicable law or agreed to in writing, software
+  ~ distributed under the License is distributed on an "AS IS" BASIS,
+  ~ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  ~ See the License for the specific language governing permissions and
+  ~ limitations under the License.
+  -->
+
+<resources>
+    <string name="app_name">GDG</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="add_gdg">"Couldn't find a GDG in your region? Great, go ahead and start one. Fill the form below and
+        expect to hear from us shortly! "
+    </string>
+    <string name="application_submitted">Got your application request!! Oh well, not really. This is a test form just
+        for educational purposes. If you really want to submit your application please visit the website!
+    </string>
+    <string name="gdg_search">GDG Search</string>
+    <string name="gdg_apply">Apply to run GDG</string>
+    <string name="gdgs_are">GDGs Are…</string>
+    <string name="gdg_description_long">GDGs are local groups of developers who are specifically interested in Google
+        products and APIs. Each local group is called a GDG chapter and can host a variety of technical activities for
+        developers - from just a few people getting together to watch our latest videos, to large gatherings with demos
+        and tech talks, to hackathons. Google Developers supports and recognizes GDG chapters, but doesn’t own or manage
+        them.
+    </string>
+    <string name="about_google_developer_groups">About Google Developer Groups</string>
+    <string name="gdg_description_bullets">️Run by passionate individuals in local developer communities\n
+        ️A group to share ideas and network with fellow developers \n
+        ️A place to learn about Google technologies and development tools \n
+        Open to and free for all interested
+    </string>
+    <string name="waiting_for_location_and_network">Waiting for location and network result.\n\n If running on an
+        emulator open the Maps app to enable location services.
+    </string>
+
+    <string name="stage_image_description">Photo from stage from a devfest</string>
+    <string name="submit_button_description">Button to submit form</string>
+    <string name="form_name_description">enter your name</string>
+    <string name="motivation">Tell us a bit more about why do you want to start a GDG</string>
+    <string name="your_name_label">Your name</string>
+    <string name="email_label">e-mail</string>
+    <string name="city_label">city</string>
+    <string name="country_label">country</string>
+    <string name="region_label">region</string>
+    <string name="enter_motivation">Please enter your motivation in 1-2 sentences</string>
+    <string name="submitted">Submitted, no need to submit again</string>
+    <string name="done">Done</string>
+    <string name="submit">Submit</string>
+</resources>
