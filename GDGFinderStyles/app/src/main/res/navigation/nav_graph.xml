@@ -1,0 +1,31 @@
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/nav_graph"
+            app:startDestination="@id/home">
+
+    <fragment
+            android:id="@+id/gdg_search"
+            android:name="com.example.android.gdgfinder.search.GdgListFragment"
+            android:label="GDG Search"
+    >
+    </fragment>
+    <fragment android:id="@+id/home" android:name="com.example.android.gdgfinder.home.HomeFragment"
+              android:label="Home" tools:layout="@layout/home_fragment">
+        <action android:id="@+id/action_homeFragment_to_gdgListFragment" app:destination="@id/gdg_search"/>
+        <action android:id="@+id/action_homeFragment_to_addGdgFragment" app:destination="@id/gdg_apply"/>
+    </fragment>
+    <fragment android:id="@+id/gdg_apply" android:name="com.example.android.gdgfinder.add.AddGdgFragment"
+              android:label="Apply" tools:layout="@layout/add_gdg_fragment"/>
+
+    <!--<fragment-->
+            <!--android:id="@+id/gdgDetailFragment"-->
+            <!--android:name="com.example.android.gdg.gdgdetail.GdgDetailFragment"-->
+            <!--android:label="fragment_overview"-->
+            <!--tools:layout="@layout/fragment_gdg_detail" >-->
+        <!--<argument-->
+        <!--android:name="selectedChapter"-->
+        <!--app:argType="com.example.android.gdg.network.GdgChapter"/>-->
+        <!--<action android:id="@+id/action_gdgDetailFragment_to_gdgListFragment" app:destination="@id/gdgListFragment"/>-->
+    <!--</fragment>-->
+</navigation>
