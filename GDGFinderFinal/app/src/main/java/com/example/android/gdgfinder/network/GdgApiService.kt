@@ -27,7 +27,7 @@ import retrofit2.http.GET
 // The alternative URL is for a server with a recent snapshot. If you are having problems
 // with the given URL (app crashing), use the alternative.
 //private const val BASE_URL = "https://android-kotlin-fun-mars-server.appspot.com/"
-private const val BASE_URL = "https://developers.google.com/community/gdg/directory/"
+private const val BASE_URL = "https://developers.google.com/community/gdg/groups/"
 
 interface GdgApiService {
     //@GET("gdg-directory.json")
