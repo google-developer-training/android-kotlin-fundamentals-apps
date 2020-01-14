@@ -91,6 +91,8 @@ class MainActivity : AppCompatActivity() {
             dessertsSold = savedInstanceState.getInt(KEY_DESSERT_SOLD, 0)
             dessertTimer.secondsCount =
                     savedInstanceState.getInt(KEY_TIMER_SECONDS, 0)
+            // Show the next dessert
+            showCurrentDessert()
         }
 
         // Set the TextViews to the right values
@@ -177,7 +179,6 @@ class MainActivity : AppCompatActivity() {
         outState.putInt(KEY_REVENUE, revenue)
         outState.putInt(KEY_DESSERT_SOLD, dessertsSold)
         outState.putInt(KEY_TIMER_SECONDS, dessertTimer.secondsCount)
-        showCurrentDessert()
     }
 
     /** Lifecycle Methods **/
