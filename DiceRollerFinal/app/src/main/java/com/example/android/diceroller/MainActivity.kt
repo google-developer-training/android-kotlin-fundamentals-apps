@@ -26,8 +26,8 @@ import java.util.*
 
 /**
  * DiceRoller demonstrates simple interactivity in an Android app.
- * It contains one button that updates a text view with a random
- * value between 1 and 6.
+ * It contains one button that updates an image view with a dice
+ * vector image with a random value between 1 and 6.
  */
 class MainActivity : AppCompatActivity() {
 
