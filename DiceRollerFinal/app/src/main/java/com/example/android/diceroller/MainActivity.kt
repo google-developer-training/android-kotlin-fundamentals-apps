@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
     private fun rollDice() {
         // Toast.makeText(this, "button clicked",
         //  Toast.LENGTH_SHORT).show()
-        val randomInt = Random().nextInt(6) + 1
+        val randomInt = (1..6).random()
 
         val drawableResource = when (randomInt) {
             1 -> R.drawable.dice_1
