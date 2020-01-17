@@ -80,15 +80,11 @@ class GameViewModel : ViewModel() {
 
     /** Methods for updating the UI **/
     fun onSkip() {
-        if (!wordList.isEmpty()) {
-            score--
-        }
+        score--
         nextWord()
     }
     fun onCorrect() {
-        if (!wordList.isEmpty()) {
-            score++
-        }
+        score++
         nextWord()
     }
 
