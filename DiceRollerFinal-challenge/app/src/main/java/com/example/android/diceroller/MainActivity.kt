@@ -55,7 +55,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun getRandomDiceImage() : Int {
-        val randomInt = Random().nextInt(6) + 1
+        val randomInt = (1..6).random()
 
         return when (randomInt) {
             1 -> R.drawable.dice_1
