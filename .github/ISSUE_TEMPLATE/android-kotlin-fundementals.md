@@ -3,7 +3,7 @@ name: Android Kotlin Fundementals
 about: Describe this issue template's purpose here.
 title: 'Android Kotlin Fundamentals codelab: '
 labels: ''
-assignees: aleksinthecloud, GeneAndGoogle, jhansi
+assignees: ''
 
 ---
 
@@ -12,6 +12,9 @@ A clear and concise description of what the problem is.
 
 **In which lesson and step of the codelab can this issue be found?**
 Lesson number + step number.
+
+**How to reproduce?**
+What are the exact steps to reproduce the problem?
 
 **Versions**
 1. What version of Android Studio are you using?
