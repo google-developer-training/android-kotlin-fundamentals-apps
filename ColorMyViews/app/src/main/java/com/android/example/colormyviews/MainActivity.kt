@@ -49,9 +49,9 @@ class MainActivity : AppCompatActivity() {
 
         val rootConstraintLayout = findViewById<View>(R.id.constraint_layout)
 
-        val redButton = findViewById<TextView>(R.id.red_button)
-        val greenButton = findViewById<TextView>(R.id.green_button)
-        val yellowButton = findViewById<TextView>(R.id.yellow_button)
+        val redButton = findViewById<Button>(R.id.red_button)
+        val greenButton = findViewById<Button>(R.id.green_button)
+        val yellowButton = findViewById<Button>(R.id.yellow_button)
 
         val clickableViews: List<View> =
             listOf(
