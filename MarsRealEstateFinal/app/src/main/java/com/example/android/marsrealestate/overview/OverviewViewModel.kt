@@ -20,6 +20,7 @@ package com.example.android.marsrealestate.overview
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.android.marsrealestate.network.MarsApi
 import com.example.android.marsrealestate.network.MarsApiFilter
 import com.example.android.marsrealestate.network.MarsProperty
@@ -75,18 +76,14 @@ class OverviewViewModel : ViewModel() {
      * @param filter the [MarsApiFilter] that is sent as part of the web server request
      */
     private fun getMarsRealEstateProperties(filter: MarsApiFilter) {
-        coroutineScope.launch {
-            // Get the Deferred object for our Retrofit request
-            var getPropertiesDeferred = MarsApi.retrofitService.getProperties(filter.value)
+        viewModelScope.launch {
+            _status.value = MarsApiStatus.LOADING
             try {
-                _status.value = MarsApiStatus.LOADING
-                // this will run on a thread managed by Retrofit
-                val listResult = getPropertiesDeferred.await()
+                _properties.value = MarsApi.retrofitService.getProperties(filter.value)
                 _status.value = MarsApiStatus.DONE
-                _properties.value = listResult
-            } catch (e: Exception) {
+            }catch (ex: Exception) {
                 _status.value = MarsApiStatus.ERROR
-                _properties.value = ArrayList()
+                _properties.value = arrayListOf()
             }
         }
     }
