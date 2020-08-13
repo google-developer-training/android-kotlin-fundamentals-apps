@@ -20,11 +20,10 @@ package com.example.android.marsrealestate.overview
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.android.marsrealestate.network.MarsApi
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+
 
 /**
  * The [ViewModel] that is attached to the [OverviewFragment].
@@ -38,12 +37,6 @@ class OverviewViewModel : ViewModel() {
     val response: LiveData<String>
         get() = _response
 
-    // Create a Coroutine scope using a job to be able to cancel when needed
-    private var viewModelJob = Job()
-
-    // the Coroutine runs using the Main (UI) dispatcher
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main )
-
     /**
      * Call getMarsRealEstateProperties() on init so we can display status immediately.
      */
@@ -56,25 +49,13 @@ class OverviewViewModel : ViewModel() {
      * Mars properties retrieved.
      */
     private fun getMarsRealEstateProperties() {
-        coroutineScope.launch {
-            // Get the Deferred object for our Retrofit request
-            var getPropertiesDeferred = MarsApi.retrofitService.getProperties()
+        viewModelScope.launch {
             try {
-                // Await the completion of our Retrofit request
-                var listResult = getPropertiesDeferred.await()
+                val listResult = MarsApi.retrofitService.getProperties()
                 _response.value = "Success: ${listResult.size} Mars properties retrieved"
             } catch (e: Exception) {
                 _response.value = "Failure: ${e.message}"
             }
         }
-    }
-
-    /**
-     * When the [ViewModel] is finished, we cancel our coroutine [viewModelJob], which tells the
-     * Retrofit service to stop.
-     */
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
     }
 }
