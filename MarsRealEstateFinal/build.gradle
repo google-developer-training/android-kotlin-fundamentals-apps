@@ -5,11 +5,11 @@ buildscript {
         // Versions for all the dependencies we plan to use. It's particularly useful for kotlin and
         // navigation where the versions of the plugin needs to be the same as the version of the
         // library defined in the app Gradle file
-        version_android_gradle_plugin = "3.3.2"
+        version_android_gradle_plugin = '4.0.1'
         version_core = "1.0.1"
         version_constraint_layout = "1.1.3"
         version_glide = "4.8.0"
-        version_kotlin = "1.3.21"
+        version_kotlin = "1.3.72"
         version_kotlin_coroutines = "1.1.0"
         version_lifecycle_extensions = "2.0.0"
         version_moshi = "1.8.0"
