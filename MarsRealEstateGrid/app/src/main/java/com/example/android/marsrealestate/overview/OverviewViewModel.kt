@@ -20,11 +20,9 @@ package com.example.android.marsrealestate.overview
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.android.marsrealestate.network.MarsApi
 import com.example.android.marsrealestate.network.MarsProperty
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 enum class MarsApiStatus { LOADING, ERROR, DONE }
@@ -49,12 +47,6 @@ class OverviewViewModel : ViewModel() {
     val properties: LiveData<List<MarsProperty>>
         get() = _properties
 
-    // Create a Coroutine scope using a job to be able to cancel when needed
-    private var viewModelJob = Job()
-
-    // the Coroutine runs using the Main (UI) dispatcher
-    private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
-
     /**
      * Call getMarsRealEstateProperties() on init so we can display status immediately.
      */
@@ -68,29 +60,16 @@ class OverviewViewModel : ViewModel() {
      * await to get the result of the transaction.
      */
     private fun getMarsRealEstateProperties() {
-        coroutineScope.launch {
+
+        viewModelScope.launch {
             _status.value = MarsApiStatus.LOADING
-            // this will run on a thread managed by Retrofit
-            var getPropertiesDeferred = MarsApi.retrofitService.getProperties()
             try {
-                _status.value = MarsApiStatus.LOADING
-                // this will run on a thread managed by Retrofit
-                val listResult = getPropertiesDeferred.await()
+                _properties.value = MarsApi.retrofitService.getProperties()
                 _status.value = MarsApiStatus.DONE
-                _properties.value = listResult
             } catch (e: Exception) {
                 _status.value = MarsApiStatus.ERROR
                 _properties.value = ArrayList()
             }
         }
-    }
-
-    /**
-     * When the [ViewModel] is finished, we cancel our coroutine [viewModelJob], which tells the
-     * Retrofit service to stop.
-     */
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
     }
 }

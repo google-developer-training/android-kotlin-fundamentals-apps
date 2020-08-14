@@ -17,13 +17,11 @@
 
 package com.example.android.marsrealestate.network
 
-import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
-import kotlinx.coroutines.Deferred
 import retrofit2.http.Query
 
 enum class MarsApiFilter(val value: String) {
@@ -31,7 +29,7 @@ enum class MarsApiFilter(val value: String) {
     SHOW_BUY("buy"),
     SHOW_ALL("all") }
 
-private const val BASE_URL = " https://android-kotlin-fun-mars-server.appspot.com/"
+private const val BASE_URL = "https://android-kotlin-fun-mars-server.appspot.com/"
 
 /**
  * Build the Moshi object that Retrofit will be using, making sure to add the Kotlin adapter for
@@ -47,7 +45,6 @@ private val moshi = Moshi.Builder()
  */
 private val retrofit = Retrofit.Builder()
         .addConverterFactory(MoshiConverterFactory.create(moshi))
-        .addCallAdapterFactory(CoroutineCallAdapterFactory())
         .baseUrl(BASE_URL)
         .build()
 
@@ -56,15 +53,12 @@ private val retrofit = Retrofit.Builder()
  */
 interface MarsApiService {
     /**
-     * Returns a Coroutine [Deferred] [List] of [MarsProperty] which can be fetched with await() if
-     * in a Coroutine scope.
+     * Returns a Coroutine [List] of [MarsProperty] which can be fetched in a Coroutine scope.
      * The @GET annotation indicates that the "realestate" endpoint will be requested with the GET
      * HTTP method
      */
     @GET("realestate")
-    fun getProperties(@Query("filter") type: String):
-    // The Coroutine Call Adapter allows us to return a Deferred, a Job with a result
-            Deferred<List<MarsProperty>>
+    suspend fun getProperties(@Query("filter") type: String): List<MarsProperty>
 }
 
 /**
