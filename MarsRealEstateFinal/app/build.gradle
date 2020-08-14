@@ -23,6 +23,7 @@ apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdkVersion 30
+
     defaultConfig {
         applicationId "com.example.android.marsrealestate"
         minSdkVersion 21
