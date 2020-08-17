@@ -176,14 +176,17 @@ class GdgChapterRepository(gdgApiService: GdgApiService) {
             }
 
             /**
-             * Creates a
+             * Creates List that contains all the chapters from the regions
+             *
+             * @param regions list of regions returned from request
+             * @return chapters list of chapters
              */
-            private fun getChapters(response: List<GdgRegion>): List<GdgChapter> {
-                var chapters1 : List<GdgChapter> = listOf()
-                for (region in response){
-                    chapters1 = chapters1 + region.chapters
+            private fun getChapters(regions: List<GdgRegion>): List<GdgChapter> {
+                var chapters : List<GdgChapter> = listOf()
+                for (region in regions){
+                    chapters = chapters + region.chapters
                 }
-                return chapters1
+                return chapters
             }
 
             /**
