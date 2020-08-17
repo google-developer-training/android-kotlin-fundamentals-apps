@@ -23,9 +23,6 @@ apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 30
-    dataBinding {
-        enabled = true
-    }
     defaultConfig {
         applicationId 'com.example.android.navigation'
         minSdkVersion 19
@@ -42,6 +39,9 @@ android {
         }
     }
     productFlavors {
+    }
+    buildFeatures {
+        dataBinding true
     }
 }
 
