@@ -37,10 +37,9 @@ android {
         }
     }
 
-    dataBinding {
-        enabled = true
-    }
-}
+    buildFeatures {
+        dataBinding true
+    }}
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])

@@ -23,9 +23,6 @@ apply plugin: "androidx.navigation.safeargs"
 
 android {
     compileSdkVersion 30
-    dataBinding {
-        enabled = true
-    }
     defaultConfig {
         applicationId "com.example.android.gdgfinder"
         minSdkVersion 19
@@ -43,6 +40,9 @@ android {
     }
     androidExtensions {
         experimental = true
+    }
+    buildFeatures {
+        dataBinding true
     }
 }
 
