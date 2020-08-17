@@ -56,7 +56,7 @@
             android:layout_marginStart="@dimen/spacing_normal"
             android:layout_marginEnd="@dimen/spacing_normal"
             android:gravity="center_vertical"
-            android:text="@{chapter.name}"
+            android:text="@{chapter.title}"
             android:textAppearance="?textAppearanceHeadline6"
             app:layout_constraintBottom_toBottomOf="@+id/gdg_image"
             app:layout_constraintEnd_toEndOf="parent"

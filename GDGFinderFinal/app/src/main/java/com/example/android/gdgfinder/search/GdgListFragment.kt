@@ -59,7 +59,7 @@ class GdgListFragment : Fragment() {
         binding.viewModel = viewModel
 
         val adapter = GdgListAdapter(GdgClickListener { chapter ->
-            val destination = Uri.parse(chapter.website)
+            val destination = Uri.parse(chapter.url)
             startActivity(Intent(Intent.ACTION_VIEW, destination))
         })
 

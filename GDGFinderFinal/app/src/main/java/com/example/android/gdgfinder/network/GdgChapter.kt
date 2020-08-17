@@ -23,30 +23,21 @@ import kotlinx.android.parcel.Parcelize
 
 @Parcelize
 data class GdgChapter(
-    @Json(name = "chapter_name") val name: String,
-    @Json(name = "cityarea") val city: String,
+    val active: Boolean,
+    @Json(name = "title") val title: String,
+    @Json(name = "city") val city: String,
     val country: String,
-    val region: String,
-    val website: String,
-    val geo: LatLong
- ): Parcelable
-
-@Parcelize
-data class LatLong(
-    val lat: Double,
-    @Json(name = "lng")
-    val long: Double
-) : Parcelable
-
-@Parcelize
-data class GdgResponse(
-        @Json(name = "filters_") val filters: Filter,
-        @Json(name = "data") val chapters: List<GdgChapter>
+    val state: String,
+    val url: String,
+    val latitude: Double,
+    val longitude: Double
 ): Parcelable
 
 @Parcelize
-data class Filter(
-        @Json(name = "region") val regions: List<String>
+data class GdgRegion(
+    @Json(name = "title") val title: String,
+    @Json(name = "chapters" +
+            "") val chapters: List<GdgChapter>
 ): Parcelable
 
 //"chapter_name": "GDG Bordj Bou-Arréridj",

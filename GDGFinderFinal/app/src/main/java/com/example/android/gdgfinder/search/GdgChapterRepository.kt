@@ -19,8 +19,7 @@ package com.example.android.gdgfinder.search
 import android.location.Location
 import com.example.android.gdgfinder.network.GdgApiService
 import com.example.android.gdgfinder.network.GdgChapter
-import com.example.android.gdgfinder.network.GdgResponse
-import com.example.android.gdgfinder.network.LatLong
+import com.example.android.gdgfinder.network.GdgRegion
 import kotlinx.coroutines.Deferred
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
@@ -160,21 +159,32 @@ class GdgChapterRepository(gdgApiService: GdgApiService) {
              * @param response the response to sort
              * @param location the location to sort by, if null the data will not be sorted.
              */
-            suspend fun from(response: GdgResponse, location: Location?): SortedData {
+            suspend fun from(response: List<GdgRegion>, location: Location?): SortedData {
                 return withContext(Dispatchers.Default) {
                     // this sorting is too expensive to do on the main thread, so do thread confinement here.
-                    val chapters: List<GdgChapter> = response.chapters.sortByDistanceFrom(location)
+
+                    val chapters: List<GdgChapter> = getChapters(response).sortByDistanceFrom(location)
                     // use distinctBy which will maintain the input order - this will have the effect of making
                     // a filter list sorted by the distance from the current location
-                    val filters: List<String> = chapters.map { it.region } .distinctBy { it }
+                    val filters: List<String> = chapters.map { it.country } .distinctBy { it }
                     // group the chapters by region so that filter queries don't require any work
-                    val chaptersByRegion: Map<String, List<GdgChapter>> = chapters.groupBy { it.region }
+                    val chaptersByRegion: Map<String, List<GdgChapter>> = chapters.groupBy { it.country }
                     // return the sorted result
                     SortedData(chapters, filters, chaptersByRegion)
                 }
 
             }
 
+            /**
+             * Creates a
+             */
+            private fun getChapters(response: List<GdgRegion>): List<GdgChapter> {
+                var chapters1 : List<GdgChapter> = listOf()
+                for (region in response){
+                    chapters1 = chapters1 + region.chapters
+                }
+                return chapters1
+            }
 
             /**
              * Sort a list of GdgChapter by their distance from the specified location.
@@ -184,15 +194,15 @@ class GdgChapterRepository(gdgApiService: GdgApiService) {
             private fun List<GdgChapter>.sortByDistanceFrom(currentLocation: Location?): List<GdgChapter> {
                 currentLocation ?: return this
 
-                return sortedBy { distanceBetween(it.geo, currentLocation)}
+                return sortedBy { distanceBetween(it, currentLocation)}
             }
 
             /**
              * Calculate the distance (in meters) between a LatLong and a Location.
              */
-            private fun distanceBetween(start: LatLong, currentLocation: Location): Float {
+            private fun distanceBetween(start: GdgChapter, currentLocation: Location): Float {
                 val results = FloatArray(3)
-                Location.distanceBetween(start.lat, start.long, currentLocation.latitude, currentLocation.longitude, results)
+                Location.distanceBetween(start.latitude, start.longitude, currentLocation.latitude, currentLocation.longitude, results)
                 return results[0]
             }
         }
