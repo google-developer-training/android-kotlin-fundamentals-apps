@@ -25,7 +25,7 @@ import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.example.android.guesstheword.R
 import com.example.android.guesstheword.databinding.GameFragmentBinding
@@ -49,9 +49,9 @@ class GameFragment : Fragment() {
                 container,
                 false
         )
-        Log.i("GameFragment", "Called ViewModelProviders.of")
+        Log.i("GameFragment", "Called ViewModelProvider.get")
 
-        viewModel = ViewModelProviders.of(this).get(GameViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(GameViewModel::class.java)
 
         // Set the viewModel for databinding - this allows the bound layout access
         // to all the data in the VieWModel
