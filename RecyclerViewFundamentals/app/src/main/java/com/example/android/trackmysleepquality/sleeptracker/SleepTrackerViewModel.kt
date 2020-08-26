@@ -21,14 +21,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.android.trackmysleepquality.database.SleepDatabaseDao
 import com.example.android.trackmysleepquality.database.SleepNight
 import com.example.android.trackmysleepquality.formatNights
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 /**
  * ViewModel for SleepTrackerFragment.
@@ -42,24 +39,6 @@ class SleepTrackerViewModel(
      */
     val database = dataSource
 
-    /** Coroutine variables */
-
-    /**
-     * viewModelJob allows us to cancel all coroutines started by this ViewModel.
-     */
-    private var viewModelJob = Job()
-
-    /**
-     * A [CoroutineScope] keeps track of all coroutines started by this ViewModel.
-     *
-     * Because we pass it [viewModelJob], any coroutine started in this uiScope can be cancelled
-     * by calling `viewModelJob.cancel()`
-     *
-     * By default, all coroutines started in uiScope will launch in [Dispatchers.Main] which is
-     * the main thread on Android. This is a sensible default because most coroutines started by
-     * a [ViewModel] update the UI after performing some processing.
-     */
-    private val uiScope = CoroutineScope(Dispatchers.Main + viewModelJob)
 
     private var tonight = MutableLiveData<SleepNight?>()
 
@@ -145,51 +124,43 @@ class SleepTrackerViewModel(
     }
 
     private fun initializeTonight() {
-        uiScope.launch {
+        viewModelScope.launch {
             tonight.value = getTonightFromDatabase()
         }
     }
 
     /**
      *  Handling the case of the stopped app or forgotten recording,
-     *  the start and end times will be the same.j
+     *  the start and end times will be the same.
      *
      *  If the start time and end time are not the same, then we do not have an unfinished
      *  recording.
      */
     private suspend fun getTonightFromDatabase(): SleepNight? {
-        return withContext(Dispatchers.IO) {
             var night = database.getTonight()
             if (night?.endTimeMilli != night?.startTimeMilli) {
                 night = null
             }
-            night
-        }
+            return night
     }
 
     private suspend fun insert(night: SleepNight) {
-        withContext(Dispatchers.IO) {
             database.insert(night)
-        }
     }
 
     private suspend fun update(night: SleepNight) {
-        withContext(Dispatchers.IO) {
             database.update(night)
-        }
     }
 
     private suspend fun clear() {
-        withContext(Dispatchers.IO) {
             database.clear()
-        }
     }
 
     /**
      * Executes when the START button is clicked.
      */
     fun onStart() {
-        uiScope.launch {
+        viewModelScope.launch {
             // Create a new night, which captures the current time,
             // and insert it into the database.
             val newNight = SleepNight()
@@ -204,7 +175,7 @@ class SleepTrackerViewModel(
      * Executes when the STOP button is clicked.
      */
     fun onStop() {
-        uiScope.launch {
+        viewModelScope.launch {
             // In Kotlin, the return@label syntax is used for specifying which function among
             // several nested ones this statement returns from.
             // In this case, we are specifying to return from launch().
@@ -224,7 +195,7 @@ class SleepTrackerViewModel(
      * Executes when the CLEAR button is clicked.
      */
     fun onClear() {
-        uiScope.launch {
+        viewModelScope.launch {
             // Clear the database table.
             clear()
 
@@ -234,16 +205,5 @@ class SleepTrackerViewModel(
             // Show a snackbar message, because it's friendly.
             _showSnackbarEvent.value = true
         }
-    }
-
-    /**
-     * Called when the ViewModel is dismantled.
-     * At this point, we want to cancel all coroutines;
-     * otherwise we end up with processes that have nowhere to return to
-     * using memory and resources.
-     */
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
     }
 }
