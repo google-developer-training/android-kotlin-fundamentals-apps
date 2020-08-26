@@ -195,7 +195,7 @@ class SleepTrackerViewModel(
      * Executes when the CLEAR button is clicked.
      */
     fun onClear() {
-        uiScope.launch {
+        viewModelScope.launch {
             // Clear the database table.
             clear()
 
@@ -207,5 +207,4 @@ class SleepTrackerViewModel(
         }
     }
 
-    /**
 }
