@@ -32,7 +32,7 @@ import retrofit2.http.GET
 
 interface DevbyteService {
     @GET("devbytes")
-    fun getPlaylist(): Deferred<NetworkVideoContainer>
+    suspend fun getPlaylist(): NetworkVideoContainer
 }
 
 /**
@@ -44,7 +44,6 @@ object DevByteNetwork {
     private val retrofit = Retrofit.Builder()
             .baseUrl("https://android-kotlin-fun-mars-server.appspot.com/")
             .addConverterFactory(MoshiConverterFactory.create())
-            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .build()
 
     val devbytes = retrofit.create(DevbyteService::class.java)
