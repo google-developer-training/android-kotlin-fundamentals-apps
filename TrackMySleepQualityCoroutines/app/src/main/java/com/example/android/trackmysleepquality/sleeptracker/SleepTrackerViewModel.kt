@@ -56,12 +56,11 @@ class SleepTrackerViewModel(
     }
 
     private suspend fun getTonightFromDatabase(): SleepNight? {
-
-            var night = database.getTonight()
-            if (night?.endTimeMilli != night?.startTimeMilli) {
-                night = null
-            }
-            return night
+        var night = database.getTonight()
+        if (night?.endTimeMilli != night?.startTimeMilli) {
+            night = null
+        }
+        return night
     }
 
     fun onStartTracking() {
@@ -73,7 +72,7 @@ class SleepTrackerViewModel(
     }
 
     private suspend fun insert(night: SleepNight) {
-            database.insert(night)
+        database.insert(night)
     }
 
     fun onStopTracking() {
@@ -85,9 +84,7 @@ class SleepTrackerViewModel(
     }
 
     private suspend fun update(night: SleepNight) {
-        withContext(Dispatchers.IO) {
-            database.update(night)
-        }
+        database.update(night)
     }
 
     fun onClear() {
@@ -98,9 +95,7 @@ class SleepTrackerViewModel(
     }
 
     suspend fun clear() {
-        withContext(Dispatchers.IO) {
-            database.clear()
-        }
+        database.clear()
     }
 }
 
