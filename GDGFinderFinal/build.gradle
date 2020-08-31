@@ -14,7 +14,7 @@ buildscript {
         version_kotlin_coroutines = "1.1.0"
         version_lifecycle_extensions = "2.0.0"
         version_moshi = "1.8.0"
-        version_navigation = "1.0.0"
+        version_navigation = "2.3.0"
         version_retrofit = "2.5.0"
         version_retrofit_coroutines_adapter = "0.9.2"
         version_recyclerview = "1.1.0-alpha03"
@@ -27,7 +27,7 @@ buildscript {
     dependencies {
         classpath 'com.android.tools.build:gradle:4.0.1'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$version_kotlin"
-        classpath "android.arch.navigation:navigation-safe-args-gradle-plugin:$version_navigation"
+        classpath "androidx.navigation:navigation-safe-args-gradle-plugin:$version_navigation"
     }
 }
 
