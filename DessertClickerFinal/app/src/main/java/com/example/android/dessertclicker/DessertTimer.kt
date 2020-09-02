@@ -17,6 +17,7 @@
 package com.example.android.dessertclicker
 
 import android.os.Handler
+import android.os.Looper
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.OnLifecycleEvent
@@ -46,7 +47,7 @@ class DessertTimer(lifecycle: Lifecycle) : LifecycleObserver {
      * [Handler] is a class meant to process a queue of messages (known as [android.os.Message]s)
      * or actions (known as [Runnable]s)
      */
-    private var handler = Handler()
+    private var handler = Handler(Looper.getMainLooper())
     private lateinit var runnable: Runnable
 
     init {
@@ -71,7 +72,6 @@ class DessertTimer(lifecycle: Lifecycle) : LifecycleObserver {
         handler.postDelayed(runnable, 1000)
 
         // Note that the Thread the handler runs on is determined by a class called Looper.
-        // In this case, no looper is defined, and it defaults to the main or UI thread.
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_STOP)

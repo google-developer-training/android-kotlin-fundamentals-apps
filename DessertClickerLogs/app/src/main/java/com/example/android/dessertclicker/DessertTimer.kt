@@ -18,6 +18,7 @@
 //
 //import android.os.Handler
 //import timber.log.Timber
+//import android.os.Looper
 //
 ///**
 // * This is a class representing a timer that you can start or stop. The secondsCount outputs a count of
@@ -43,7 +44,7 @@
 //     * [Handler] is a class meant to process a queue of messages (known as [android.os.Message]s)
 //     * or actions (known as [Runnable]s)
 //     */
-//    private var handler = Handler()
+//    private var handler = Handler(Looper.getMainLooper())
 //    private lateinit var runnable: Runnable
 //
 //
@@ -62,7 +63,6 @@
 //        handler.postDelayed(runnable, 1000)
 //
 //        // Note that the Thread the handler runs on is determined by a class called Looper.
-//        // In this case, no looper is defined, and it defaults to the main or UI thread.
 //    }
 //
 //    fun stopTimer() {
