@@ -19,6 +19,7 @@ package com.android.example.colormyviews
 import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import android.widget.Button
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -49,9 +50,9 @@ class MainActivity : AppCompatActivity() {
 
         val rootConstraintLayout = findViewById<View>(R.id.constraint_layout)
 
-        val redButton = findViewById<TextView>(R.id.red_button)
-        val greenButton = findViewById<TextView>(R.id.green_button)
-        val yellowButton = findViewById<TextView>(R.id.yellow_button)
+        val redButton = findViewById<Button>(R.id.red_button)
+        val greenButton = findViewById<Button>(R.id.green_button)
+        val yellowButton = findViewById<Button>(R.id.yellow_button)
 
         val clickableViews: List<View> =
             listOf(
