@@ -16,7 +16,7 @@
 
 package com.example.android.gdgfinder.add
 
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -31,7 +31,7 @@ import com.google.android.material.snackbar.Snackbar
 class AddGdgFragment : Fragment() {
 
     private val viewModel: AddGdgViewModel by lazy {
-        ViewModelProviders.of(this).get(AddGdgViewModel::class.java)
+        ViewModelProvider(this).get(AddGdgViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,

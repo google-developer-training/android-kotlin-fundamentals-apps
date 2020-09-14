@@ -22,6 +22,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.viewModelScope
 import com.example.android.devbyteviewer.database.getDatabase
 import com.example.android.devbyteviewer.domain.DevByteVideo
 import com.example.android.devbyteviewer.network.DevByteNetwork
@@ -42,7 +43,6 @@ import java.io.IOException
  */
 class DevByteViewModel(application: Application) : AndroidViewModel(application) {
 
-
     /**
      * The data source this ViewModel will fetch results from.
      */
@@ -52,21 +52,6 @@ class DevByteViewModel(application: Application) : AndroidViewModel(application)
      * A playlist of videos displayed on the screen.
      */
     val playlist = videosRepository.videos
-
-    /**
-     * This is the job for all coroutines started by this ViewModel.
-     *
-     * Cancelling this job will cancel all coroutines started by this ViewModel.
-     */
-    private val viewModelJob = SupervisorJob()
-
-    /**
-     * This is the main scope for all coroutines launched by MainViewModel.
-     *
-     * Since we pass viewModelJob, you can cancel all coroutines launched by uiScope by calling
-     * viewModelJob.cancel()
-     */
-    private val viewModelScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     /**
      * Event triggered for network error. This is private to avoid exposing a
@@ -120,21 +105,11 @@ class DevByteViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-
     /**
      * Resets the network error flag.
      */
     fun onNetworkErrorShown() {
         _isNetworkErrorShown.value = true
-    }
-
-
-    /**
-     * Cancel all coroutines when the ViewModel is cleared
-     */
-    override fun onCleared() {
-        super.onCleared()
-        viewModelJob.cancel()
     }
 
     /**

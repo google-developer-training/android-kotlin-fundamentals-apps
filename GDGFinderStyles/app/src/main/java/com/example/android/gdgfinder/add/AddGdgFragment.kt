@@ -22,7 +22,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
+import androidx.lifecycle.ViewModelProvider
 import com.example.android.gdgfinder.R
 import com.example.android.gdgfinder.databinding.AddGdgFragmentBinding
 import com.google.android.material.snackbar.Snackbar
@@ -30,7 +30,7 @@ import com.google.android.material.snackbar.Snackbar
 class AddGdgFragment : Fragment() {
 
     private val viewModel: AddGdgViewModel by lazy {
-        ViewModelProviders.of(this).get(AddGdgViewModel::class.java)
+        ViewModelProvider(this).get(AddGdgViewModel::class.java)
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
