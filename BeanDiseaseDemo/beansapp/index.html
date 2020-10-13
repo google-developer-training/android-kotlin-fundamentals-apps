@@ -1,0 +1,16 @@
+<html>
+    <head>
+        <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs/dist/tf.min.js"> </script>
+        <script src="webcam.js"></script>
+    </head>
+    <body>
+    <div>
+		<div>
+			<video autoplay playsinline muted id="wc" width="224" height="224"></video>
+		</div>
+	</div>
+    <button type="button" id="startPredicting" onclick="doPrediction()" >Classify</button>
+	<div id="prediction"></div>
+    </body>
+    <script src="index.js"></script>
+</html>
