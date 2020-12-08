@@ -84,11 +84,24 @@ class MainActivity : AppCompatActivity() {
             R.id.box_five_text -> view.setBackgroundColor(Color.BLUE)
 
             // Boxes using custom colors for background
-            R.id.red_button -> box_three_text.setBackgroundResource(R.color.my_red)
-            R.id.yellow_button -> box_four_text.setBackgroundResource(R.color.my_yellow)
-            R.id.green_button -> box_five_text.setBackgroundResource(R.color.my_green)
+            //R.id.red_button -> box_three_text.setBackgroundResource(R.color.my_red)
+            //R.id.yellow_button -> box_four_text.setBackgroundResource(R.color.my_yellow)
+            //R.id.green_button -> box_five_text.setBackgroundResource(R.color.my_green)
 
-            else -> view.setBackgroundColor(Color.LTGRAY)
+            //else -> view.setBackgroundColor(Color.LTGRAY)
         }
+        
+        //handling button with if-else to avoid calling findViewById every time
+        if(view.id == R.id.red_button){
+            val boxFiveText = findViewById<TextView>(R.id.box_three_text)
+            boxFiveText.setBackgroundResource(R.color.my_red)
+        }
+        else if(view.id == R.id.yellow_button){
+            val boxFiveText = findViewById<TextView>(R.id.box_four_text)
+            boxFiveText.setBackgroundResource(R.color.my_yellow)
+        }
+        else if(view.id == R.id.green_button){
+            val boxFiveText = findViewById<TextView>(R.id.box_five_text)
+            boxFiveText.setBackgroundResource(R.color.my_green)
     }
 }
