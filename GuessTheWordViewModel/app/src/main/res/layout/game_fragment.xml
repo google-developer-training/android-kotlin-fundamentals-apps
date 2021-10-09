@@ -18,6 +18,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
+    <data>
+
+        <variable
+            name="gameViewModel"
+            type="com.example.android.guesstheword.screens.game.GameViewModel" />
+    </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/game_layout"
         android:layout_width="match_parent"
@@ -50,6 +57,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             android:textColor="@color/black_text_color"
             android:textSize="34sp"
+            android:text="@{gameViewModel.word.toString()}"
             android:textStyle="normal"
             app:layout_constraintBottom_toTopOf="@+id/score_text"
             app:layout_constraintEnd_toEndOf="parent"
@@ -84,6 +92,7 @@
             android:fontFamily="sans-serif"
             android:textColor="@color/grey_text_color"
             android:textSize="14sp"
+            android:text="@{gameViewModel.scoreLiveData.toString()}"
             android:textStyle="normal"
             app:layout_constraintBottom_toTopOf="@+id/guideline"
             app:layout_constraintEnd_toEndOf="parent"
@@ -97,6 +106,7 @@
             android:layout_marginStart="16dp"
             android:text="@string/skip"
             android:theme="@style/SkipButton"
+            android:onClick="@{gameViewModel::onSkip}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHorizontal_chainStyle="spread_inside"
             app:layout_constraintStart_toStartOf="parent"
@@ -118,6 +128,7 @@
             android:layout_marginEnd="8dp"
             android:text="@string/got_it"
             android:theme="@style/GoButton"
+            android:onClick="@{gameViewModel::onCorrect}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toStartOf="@+id/end_game_button"
             app:layout_constraintStart_toEndOf="@+id/skip_button"
