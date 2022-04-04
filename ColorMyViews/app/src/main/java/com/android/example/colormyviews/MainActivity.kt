@@ -29,6 +29,9 @@ import kotlinx.android.synthetic.main.activity_main.*
  * the Layout Editor.
  */
 class MainActivity : AppCompatActivity() {
+    lateinit var boxThreeText: TextView
+    lateinit var boxFourText: TextView
+    lateinit var boxFiveText: TextView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -44,9 +47,9 @@ class MainActivity : AppCompatActivity() {
 
         val boxOneText = findViewById<TextView>(R.id.box_one_text)
         val boxTwoText = findViewById<TextView>(R.id.box_two_text)
-        val boxThreeText = findViewById<TextView>(R.id.box_three_text)
-        val boxFourText = findViewById<TextView>(R.id.box_four_text)
-        val boxFiveText = findViewById<TextView>(R.id.box_five_text)
+        boxThreeText = findViewById(R.id.box_three_text)
+        boxFourText = findViewById(R.id.box_four_text)
+        boxFiveText = findViewById(R.id.box_five_text)
 
         val rootConstraintLayout = findViewById<View>(R.id.constraint_layout)
 
@@ -84,9 +87,9 @@ class MainActivity : AppCompatActivity() {
             R.id.box_five_text -> view.setBackgroundColor(Color.BLUE)
 
             // Boxes using custom colors for background
-            R.id.red_button -> box_three_text.setBackgroundResource(R.color.my_red)
-            R.id.yellow_button -> box_four_text.setBackgroundResource(R.color.my_yellow)
-            R.id.green_button -> box_five_text.setBackgroundResource(R.color.my_green)
+            R.id.red_button -> boxThreeText.setBackgroundResource(R.color.my_red)
+            R.id.yellow_button -> boxFourText.setBackgroundResource(R.color.my_yellow)
+            R.id.green_button -> boxFiveText.setBackgroundResource(R.color.my_green)
 
             else -> view.setBackgroundColor(Color.LTGRAY)
         }
