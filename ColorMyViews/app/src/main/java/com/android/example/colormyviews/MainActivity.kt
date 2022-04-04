@@ -84,10 +84,14 @@ class MainActivity : AppCompatActivity() {
             R.id.box_five_text -> view.setBackgroundColor(Color.BLUE)
 
             // Boxes using custom colors for background
-            R.id.red_button -> box_three_text.setBackgroundResource(R.color.my_red)
-            R.id.yellow_button -> box_four_text.setBackgroundResource(R.color.my_yellow)
-            R.id.green_button -> box_five_text.setBackgroundResource(R.color.my_green)
+            //R.id.red_button -> box_three_text.setBackgroundResource(R.color.my_red)
+            //R.id.yellow_button -> box_four_text.setBackgroundResource(R.color.my_yellow)
+            //R.id.green_button -> box_five_text.setBackgroundResource(R.color.my_green)
 
+            R.id.red_button -> box_three_text.setBackgroundColor(getResources().getColor(R.color.my_red))
+            R.id.yellow_button -> box_four_text.setBackgroundColor(getResources().getColor(R.color.my_yellow))
+            R.id.green_button -> box_five_text.setBackgroundColor(getResources().getColor(R.color.my_green))
+            
             else -> view.setBackgroundColor(Color.LTGRAY)
         }
     }
