@@ -1,3 +1,5 @@
+**Caution**: This course is out of date and no longer maintained. Instead, please refer to the [Android Basics with Compose](https://developer.android.com/courses/android-basics-compose/course) course for the latest recommended practices. If you are looking for content on Views, you can check out the [Android Basics in Kotlin](https://developer.android.com/courses/android-basics-kotlin/course) course.
+
 Android Fundamentals in Kotlin Solution Apps
 ===========================================
 
