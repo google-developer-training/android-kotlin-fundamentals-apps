@@ -94,7 +94,7 @@ class SleepTrackerViewModel(
         }
     }
 
-    suspend fun clear() {
+    private suspend fun clear() {
         database.clear()
     }
 }
